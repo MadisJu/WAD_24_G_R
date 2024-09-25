@@ -5,8 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../Styling/main.css">
+
+    
+    <script>
+        //This used to be a script on my old website, i just copy pasted this, its from Intro2CS course https://github.com/JoosepPodekrat/Veebilehe-projekt/blob/main/index.html
+        
+        //See script on sisu laadimiseks siia html-i peale teistest html lehekülgede pealt
+        //inspiratsioon võetud https://www.w3schools.com/xml/xml_http.asp
+        function load(link)
+        {
+            //Making a request
+            var req= new XMLHttpRequest();
+            //Modifying onready state func
+            req.onreadystatechange= function() {
+                if (this.readyState!==4) return; //Skip if req nor response != ready
+                if (this.status!==200) return; // Skip if req != OK
+                document.getElementById("Content").innerHTML= this.responseText; // If response = ok then puts the response into Div element with id "content"
+            };
+            req.open("GET", link, true);        
+            req.send(); //Sends the request
+        }
+    </script>
 </head>
 <body>
-    
+    <!-- Header div, making this so that -->
+    <div id="Navbar">
+        <div id="Navbar-button">
+            <a class = "Navbar-Link" onclick="load('main.html')">Home</a>
+        </div>
+        <div id="Navbar-button">
+            <a class = "Navbar-Link" onclick="load('addPost.html')">addPost</a>
+        </div>
+        <p></p>
+        <div id="Navbar-button">
+            <a class = "Navbar-Link" onclick="load('login.html')">Profile</a>
+        </div>
+    </div>
+    <!-- Content -->
+    <div id="Content">
+
+    </div>
 </body>
 </html>
