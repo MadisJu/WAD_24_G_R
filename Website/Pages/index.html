@@ -5,45 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../Styling/main.css">
-
-    
-    <script>
-        //This used to be a script on my old website, i just copy pasted this, its from Intro2CS course https://github.com/JoosepPodekrat/Veebilehe-projekt/blob/main/index.html
-        
-        //See script on sisu laadimiseks siia html-i peale teistest html lehekülgede pealt
-        //inspiratsioon võetud https://www.w3schools.com/xml/xml_http.asp
-        function load(link)
-        {
-            //Making a request
-            var req= new XMLHttpRequest();
-            //Modifying onready state func
-            req.onreadystatechange= function() {
-                if (this.readyState!==4) return; //Skip if req nor response != ready
-                if (this.status!==200) return; // Skip if req != OK
-                document.getElementById("Content").innerHTML= this.responseText; // If response = ok then puts the response into Div element with id "content"
-            };
-            req.open("GET", link, true);        
-            req.send(); //Sends the request
-        }
-    </script>
 </head>
 <body>
-    <!-- Header div, making this so that the navbar is the same on each page :) -->
-    <div id="Navbar">
-        <div id="Navbar-button">
-            <a class = "Navbar-Link" onclick="load('main.html')">Home</a>
+    <header>
+        <div id="Nav-Container">
+            <div class="Navbar-button">
+                <a class = "Navbar-Link" href="index.html">Home</a>
+            </div>
+            <p>|</p>
+            <div class="Navbar-button">
+                <a class = "Navbar-Link" href="addPost.html">addPost</a>
+            </div>
         </div>
-        <div id="Navbar-button">
-            <a class = "Navbar-Link" onclick="load('addPost.html')">addPost</a>
+        <div class="Navbar-button">
+            <a class = "Navbar-Link" href="login.html">Profile</a>
         </div>
-        <p></p>
-        <div id="Navbar-button">
-            <a class = "Navbar-Link" onclick="load('login.html')">Profile</a>
-        </div>
-    </div>
-    <!-- Content -->
+    </header>
     <div id="Content">
-
+            <div id="Forum-display">
+                <div id="Side-banner-left">
+        
+                </div>
+                <div id= "Forum">
+                    <div class="Post">
+                        <div class="Post-header">
+                            <img class="Profile-image" src="../Data/Default.jpg">
+                            <h2>DATE</h1>
+                        </div>
+                        <div class = "Post-content">
+                            <img class="Post-image">
+                            <p>Paragraph</p>
+                        </div>
+                        <div class="Post-misc">
+                            <p>Misc</p>
+                        </div>
+                    </div>
+                    <div class="Post">
+                        <div class="Post-header">
+                            <img class="Profile-image" src="../Data/Default.jpg">
+                            <h2>DATE</h1>
+                        </div>
+                        <div class = "Post-content">
+                            <img class="Post-image">
+                            <p>Paragraph</p>
+                        </div>
+                        <div class="Post-misc">
+                            <p>Misc</p>
+                        </div>
+                    </div>
+                    <div class="Post">
+                        <div class="Post-header">
+                            <img class="Profile-image" src="../Data/Default.jpg">
+                            <h2>DATE</h1>
+                        </div>
+                        <div class = "Post-content">
+                            <img class="Post-image">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <div class="Post-misc">
+                            <p>Misc</p>
+                        </div>
+                    </div>
+                    <div class="Post">
+                        <div class="Post-header">
+                            <img class="Profile-image" src="../Data/Default.jpg">
+                            <h2>DATE</h1>
+                        </div>
+                        <div class = "Post-content">
+                            <img class="Post-image">
+                            <p>Paragraph</p>
+                        </div>
+                        <div class="Post-misc">
+                            <p>Misc</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="Side-banner-right">
+        
+                </div>
+            </div>
     </div>
+    <footer>
+        <p id="Team-info">Team R</p>
+    </footer>
 </body>
 </html>
