@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../Styling/main.css">
+    <title>Postitused</title>
+    <link rel="stylesheet" href="../Styling/index.css">
 
     
     <script>
@@ -34,16 +34,98 @@
             <a class = "Navbar-Link" onclick="load('main.html')">Home</a>
         </div>
         <div id="Navbar-button">
-            <a class = "Navbar-Link" onclick="load('addPost.html')">addPost</a>
+            <a class = "Navbar-Link" onclick="load('addPost.html')">Add Post</a>
         </div>
         <p></p>
         <div id="Navbar-button">
-            <a class = "Navbar-Link" onclick="load('login.html')">Profile</a>
+            <a class = "Navbar-Link" onclick="load('login.html')">
+                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
+            </a>
         </div>
     </div>
     <!-- Content -->
     <div id="Content">
 
     </div>
+    <main></main>
+    <div class="post-container">
+        <!-- Esimene postitus -->
+        <div class="post">
+            <div class="post-header">
+                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
+                <span class="post-date">Oct 22, 2022</span>
+            </div>
+            <div class="post-content">
+                <img src="../Data/tartu2022.jpg" alt="Postituspilt" class="post-image">
+                <p class="post-text">Tartu 2022</p>
+            </div>
+            <div class="post-footer">
+                <button class="like-button">👍 Like</button>
+            </div>
+        </div>
+    
+        <!-- Teine postitus -->
+        <div class="post">
+            <div class="post-header">
+                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
+                <span class="post-date">Oct 22, 2022</span>
+            </div>
+            <div class="post-content">
+                <p class="post-text">Anyone knows in which room is the lab today?</p>
+            </div>
+            <div class="post-footer">
+                <button class="like-button">👍 Like</button>
+            </div>
+        </div>
+    
+        <!-- Kolmas postitus -->
+        <div class="post">
+            <div class="post-header">
+                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
+                <span class="post-date">Nov 2, 2022</span>
+            </div>
+            <div class="post-content">
+                <img src="../Data/happy man.jpg" alt="Postituspilt" class="post-image">
+                <p class="post-text">Guyss!! I'm so happy about this homework!</p>
+            </div>
+            <div class="post-footer">
+                <button class="like-button">👍 Like</button>
+            </div>
+        </div>
+
+        <!-- Neljas postitus -->
+        <div class="post">
+            <div class="post-header">
+                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
+                <span class="post-date">Nov 18, 2022</span>
+            </div>
+            <div class="post-content">
+                <p class="post-text">Live, laugh, love.</p>
+            </div>
+            <div class="post-footer">
+                <button class="like-button">👍 Like</button>
+            </div>
+        </div>
+
+        <!-- Viies postitus -->
+        <div class="post">
+            <div class="post-header">
+                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
+                <span class="post-date">Dec 9, 2022</span>
+            </div>
+            <div class="post-content">
+                <img src="../Data/inspiring-quote.png" alt="Postituspilt" class="post-image">
+                <p class="post-text">Something to make your day better...</p>
+            </div>
+            <div class="post-footer">
+                <button class="like-button">👍 Like</button>
+            </div>
+        </div>
+    </div>
+    
+    </main>
+
+    <footer></footer>
+
 </body>
 </html>
