@@ -1,6 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisa postitus</title>
+    <link rel="stylesheet" href="../Styling/addPost.css">
+
+</head>
 <body>
+    <div id="Navbar">
+        <div id="Navbar-button">
+            <a class = "Navbar-Link" href="index.html">Home</a>
+        </div>
+        <div></div>
+        <div id="Navbar-button">
+            <a class = "Navbar-Link" href="login.html">
+                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
+            </a>
+        </div>
+    </div>
+
+    <!-- Form to Add Post-->
+     <div class="form-container">
+        <form class="add-post-form" action="index.html" method="POST">
+            <div class="form-group">
+                <label for="postBody">Post body</label>
+                <textarea id="postBody" name="postBody" rows="4" cols="20"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="postImage">Select file</label>
+                <input type="file" id="postImage" name="postImage">
+            </div>
+            <button tyoe="sumbit" class="create-post-button">Create post</button>
+        </form>
+     </div>
     
+
+    <footer></footer>
+
 </body>
 </html>
