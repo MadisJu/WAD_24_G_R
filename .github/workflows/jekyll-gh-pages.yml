@@ -30,10 +30,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Set environment variables
+        run: echo "SOURCE_DIR=Websites/Pages" >> $GITHUB_ENV
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ../Websites/Pages
+          source: ${{ env.SOURCE_DIR }}
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
