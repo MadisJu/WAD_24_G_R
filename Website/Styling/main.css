@@ -5,8 +5,9 @@
     --color3: #cb84a0;
     --color4: #fededd;
     --Background: #5a2454;
+    --Background2: #a04896;
     --Text: #ffffff;
-    background-color: var(--Background);
+    background: linear-gradient(to bottom, var(--color2), var(--Background));
     
 }
 html, body {
@@ -42,6 +43,9 @@ header
     justify-content: space-between;
     padding: 10px;
     box-sizing: border-box;
+    margin-bottom: 15px;
+    z-index: 1000;
+    height: 50px;
 }
 
 .Navbar-button
@@ -74,7 +78,7 @@ header
 
 #Content
 {
-    margin-top: 5%;
+    /* margin-top: 5%; */
     flex: 1;
     overflow-y: auto;
     display: flex;
@@ -86,8 +90,13 @@ header
 #Forum-display
 {
     display:grid;
-    grid-template-columns: 10% 70% 10%;
+    grid-template-columns: 15% 60% 15%;
     grid-gap: 5%;
+    height: 100%;
+    overflow: hidden;
+    margin-left: 1%;
+    margin-right:1%;
+    
 }
 
 #Forum
@@ -97,9 +106,16 @@ header
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    overflow-y: auto;
     box-sizing: border-box;
-    overflow-x: hidden;
+    overflow-y: auto;
+
+    /* Had problems with Scrollbar appearing suddenly when implementing ads etc */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+#Forum::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
 }
 
 .Post
@@ -148,15 +164,32 @@ header
 
 footer 
 {
+    display: flex;
+    align-content: center;
     background-color: var(--color3);
     position: relative;
     bottom: 0;
     padding: 1rem;
     margin-top: 15px;
+    height: 30px;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #Team-info {
     text-align: center;
+}
+
+#Team-info + img
+{
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 3px;
+}
+
+#Team-info ~ a
+{
+    font-size: small;
 }
 
 .Post-misc
@@ -164,19 +197,38 @@ footer
 
 }
 
-#Side-banner-left
+#Side-banner
 {
+    max-height: 80vh;
+    position: sticky;
+    position: -webkit-sticky;
+}
+
+#Side-banner > div
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 80vh;
+    width: 100%;
+    /* margin-top: 60px; */
+    top: 0px;
+    border: 3px solid var(--color4);
+    overflow: hidden;
     
 }
 
-.Advertisement
+
+#Ad-link img
 {
-    
+    min-width: 100%;
+    min-height: 100%;
+    transition: transform 0.3s;
 }
 
-#Side-banner-right
+#Side-banner img:hover
 {
-
+    transform: scale(1.1);
 }
 
 #Login-form {
@@ -196,6 +248,17 @@ footer
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
+
+/* Like nupu stiil */
+.Like-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .Like-button:hover {
     background-color: #0056b3;
 }
