@@ -5,8 +5,9 @@
     --color3: #cb84a0;
     --color4: #fededd;
     --Background: #5a2454;
+    --Background2: #804679;
     --Text: #ffffff;
-    background-color: var(--Background);
+    background: linear-gradient(to bottom, var(--Background2), var(--Background));
     
 }
 body{
