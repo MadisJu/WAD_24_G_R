@@ -1,0 +1,131 @@
+:root
+{
+    --background-color: #f4c7e3;
+    --color2: #875682;
+    --color3: #cb84a0;
+    --color4: #fededd;
+    --Background: #5a2454;
+    --Text: #ffffff;
+    background-color: var(--Background);
+    
+}
+body{
+    padding-top: 60px;
+}
+p
+{
+    color: black;
+    margin-bottom: 10px; 
+}
+a
+{
+    color: var(--Text);
+    text-decoration: none;
+}
+
+#Navbar
+{
+    background-color: var(--color3);
+    width: 100%;
+    height: 45px;
+    display: grid;
+    grid-template-columns: 10% auto 10%;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#Navbar-button
+{
+    background-color: var(--color3);
+    display:flex;
+    overflow:hidden;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+#Navbar-button:hover
+{
+    background-color: var(--background-color);
+}
+.Navbar-Link
+{
+    padding:auto;
+
+}
+
+
+/* Profiilipilt */
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 0; 
+    justify-self: end;
+}
+
+/* Form container to center the form on the page */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+/* Styling for the add post form */
+.add-post-form {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr; /* Set a single column for the form */
+    grid-gap: 15px;
+    align-items: center;
+    width: 300px; /* Set a specific width for the form */
+    
+}
+
+/* Label and input styling */
+.form-group {
+    display: flex;
+    align-items: flex-start;
+}
+
+textarea {
+    width: 90%; 
+    padding: 10px;
+    font-size: 14px;
+}
+
+input[type="file"] {
+    padding: 5px;
+    font-size: 14px;
+    width: 100%; /* Make the file input full width */
+}
+
+/* Styling for the submit button */
+.create-post-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 40%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.create-post-button:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    height: 60px;
+}
+
