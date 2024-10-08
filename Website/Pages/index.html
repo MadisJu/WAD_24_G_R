@@ -4,128 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Postitused</title>
-    <link rel="stylesheet" href="../Styling/index.css">
-
-    
-    <script>
-        //This used to be a script on my old website, i just copy pasted this, its from Intro2CS course https://github.com/JoosepPodekrat/Veebilehe-projekt/blob/main/index.html
-        
-        //See script on sisu laadimiseks siia html-i peale teistest html lehekülgede pealt
-        //inspiratsioon võetud https://www.w3schools.com/xml/xml_http.asp
-        function load(link)
-        {
-            //Making a request
-            var req= new XMLHttpRequest();
-            //Modifying onready state func
-            req.onreadystatechange= function() {
-                if (this.readyState!==4) return; //Skip if req nor response != ready
-                if (this.status!==200) return; // Skip if req != OK
-                document.getElementById("Content").innerHTML= this.responseText; // If response = ok then puts the response into Div element with id "content"
-            };
-            req.open("GET", link, true);        
-            req.send(); //Sends the request
-        }
-    </script>
+    <link rel="stylesheet" href="../Styling/main.css">
 </head>
 <body>
-    <!-- Header div, making this so that the navbar is the same on each page :) -->
-    <div id="Navbar">
-        <div id="Navbar-button">
-            <a class = "Navbar-Link" onclick="load('main.html')">Home</a>
+    <header>
+        <div id="Nav-Container">
+            <div class="Navbar-button">
+                <a class = "Navbar-Link" href="index.html">Home</a>
+            </div>
+            <p>|</p>
+            <div class="Navbar-button">
+                <a class = "Navbar-Link" href="addPost.html">addPost</a>
+            </div>
         </div>
-        <div id="Navbar-button">
-            <a class = "Navbar-Link" onclick="load('addPost.html')">Add Post</a>
+        <div class="Navbar-button">
+            <a class = "Navbar-Link" href="login.html">Profile</a>
         </div>
-        <p></p>
-        <div id="Navbar-button">
-            <a class = "Navbar-Link" onclick="load('login.html')">
-                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
-            </a>
-        </div>
-    </div>
-    <!-- Content -->
+    </header>
     <div id="Content">
-
+            <div id="Forum-display">
+                <div id="Side-banner-left">
+        
+                </div>
+                <div id= "Forum">
+                    <div class="Post">
+                        <div class="Post-header">
+                            <img class="Profile-image" src="../Data/Default.jpg">
+                            <h2>DATE</h1>
+                        </div>
+                        <div class = "Post-content">
+                            <img class="Post-image">
+                            <p>Paragraph</p>
+                        </div>
+                        <div class="Post-misc">
+                            <p>Misc</p>
+                        </div>
+                    </div>
+                    <div class="Post">
+                        <div class="Post-header">
+                            <img class="Profile-image" src="../Data/Default.jpg">
+                            <h2>DATE</h1>
+                        </div>
+                        <div class = "Post-content">
+                            <img class="Post-image">
+                            <p>Paragraph</p>
+                        </div>
+                        <div class="Post-misc">
+                            <p>Misc</p>
+                        </div>
+                    </div>
+                    <div class="Post">
+                        <div class="Post-header">
+                            <img class="Profile-image" src="../Data/Default.jpg">
+                            <h2>DATE</h1>
+                        </div>
+                        <div class = "Post-content">
+                            <img class="Post-image">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <div class="Post-misc">
+                            <p>Misc</p>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="post-header">
+                            <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
+                            <span class="post-date">Dec 9, 2022</span>
+                        </div>
+                        <div class="post-content">
+                            <img src="../Data/inspiring-quote.png" alt="Postituspilt" class="post-image">
+                            <p class="post-text">Something to make your day better...</p>
+                        </div>
+                        <div class="post-footer">
+                            <button class="like-button">👍 Like</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="Side-banner-right">
+        
+                </div>
+            </div>
     </div>
-    <main></main>
-    <div class="post-container">
-        <!-- Esimene postitus -->
-        <div class="post">
-            <div class="post-header">
-                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
-                <span class="post-date">Oct 22, 2022</span>
-            </div>
-            <div class="post-content">
-                <img src="../Data/tartu2022.jpg" alt="Postituspilt" class="post-image">
-                <p class="post-text">Tartu 2022</p>
-            </div>
-            <div class="post-footer">
-                <button class="like-button">👍 Like</button>
-            </div>
-        </div>
-    
-        <!-- Teine postitus -->
-        <div class="post">
-            <div class="post-header">
-                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
-                <span class="post-date">Oct 22, 2022</span>
-            </div>
-            <div class="post-content">
-                <p class="post-text">Anyone knows in which room is the lab today?</p>
-            </div>
-            <div class="post-footer">
-                <button class="like-button">👍 Like</button>
-            </div>
-        </div>
-    
-        <!-- Kolmas postitus -->
-        <div class="post">
-            <div class="post-header">
-                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
-                <span class="post-date">Nov 2, 2022</span>
-            </div>
-            <div class="post-content">
-                <img src="../Data/happy man.jpg" alt="Postituspilt" class="post-image">
-                <p class="post-text">Guyss!! I'm so happy about this homework!</p>
-            </div>
-            <div class="post-footer">
-                <button class="like-button">👍 Like</button>
-            </div>
-        </div>
-
-        <!-- Neljas postitus -->
-        <div class="post">
-            <div class="post-header">
-                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
-                <span class="post-date">Nov 18, 2022</span>
-            </div>
-            <div class="post-content">
-                <p class="post-text">Live, laugh, love.</p>
-            </div>
-            <div class="post-footer">
-                <button class="like-button">👍 Like</button>
-            </div>
-        </div>
-
-        <!-- Viies postitus -->
-        <div class="post">
-            <div class="post-header">
-                <img src="../Data/profile.png" alt="Profiilipilt" class="profile-image">
-                <span class="post-date">Dec 9, 2022</span>
-            </div>
-            <div class="post-content">
-                <img src="../Data/inspiring-quote.png" alt="Postituspilt" class="post-image">
-                <p class="post-text">Something to make your day better...</p>
-            </div>
-            <div class="post-footer">
-                <button class="like-button">👍 Like</button>
-            </div>
-        </div>
-    </div>
-    
-    </main>
-
-    <footer></footer>
-
 </body>
+    <footer>
+        <p id="Team-info">Team R</p>
+    </footer>
 </html>
