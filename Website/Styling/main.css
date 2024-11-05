@@ -1,13 +1,18 @@
 /*--------------- Root Variables---------------*/
 :root {
     --background-color: #f4c7e3;
-    --color2: #875682;
-    --color3: #cb84a0;
-    --color4: #fededd;
+    --PurpleLight3: #875682;
+    --PurpleLight2: #b36c93;
+    --PurpleLight1: #fededd;
+    
+    --Post-background: #75326e;
     --Background: #5a2454;
     --Background2: #a04896;
+    --Background4: #be67b4;
+    --Background3: #170515;
+
     --Text: #ffffff;
-    background: linear-gradient(to bottom, var(--color2), var(--Background));
+    background: linear-gradient(to bottom, var(--Background3) 0%, var(--Background2) 8%, var(--Background) 100%);
 }
 
 
@@ -20,19 +25,21 @@ html, body {
 }
 
 body {
+    margin: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 
-/*--------------- Typography---------------*/
+/*--------------- Text Stylings---------------*/
 p, b {
     color: var(--Text);
     margin: 0px;
 }
 
 p {
-    color: black;
+    color: var(--Text);
     margin-bottom: 10px;
 }
 
@@ -48,7 +55,7 @@ h2 {
 
 /*--------------- Header Stylings---------------*/
 header {
-    background-color: var(--color3);
+    background: linear-gradient(179deg, var(--PurpleLight3), var(--Background));
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -59,24 +66,28 @@ header {
 }
 
 .Navbar-button {
-    background-color: var(--color3);
     display: flex;
-    overflow: hidden;
+    overflow: visible;
     align-items: center;
     align-content: center;
     justify-content: center;
     padding-left: 1rem;
     padding-right: 1rem;
+    height: 100%;
 }
 
 .Navbar-Link {
     padding: 0.5rem;
     text-decoration: none;
-
+    max-height: 100%;
+    text-align: center;
+    margin: auto;
 }
 
 .Navbar-Link:hover {
-    background-color: var(--background-color);
+    transform: scale(1.3);
+    color: var(--PurpleLight1);
+    transition: all 0.3s ease-in-out;
 }
 
 .Navbar-Link > button {
@@ -103,12 +114,13 @@ header {
 
 #Forum-display {
     display: grid;
-    grid-template-columns: 15% 60% 15%;
-    grid-gap: 5%;
-    height: 100%;
-    overflow: hidden;
-    margin-left: 1%;
-    margin-right: 1%;
+    grid-template-columns: 15% 65% 15%;
+    gap: 2.5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 
@@ -121,8 +133,7 @@ header {
     gap: 20px;
     box-sizing: border-box;
     overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    padding-right: 20px;
 }
 
 #Forum::-webkit-scrollbar {
@@ -134,28 +145,62 @@ header {
 .Post {
     width: 100%;
     border-radius: 5px;
-    background-color: var(--color3);
+    background: linear-gradient(170deg, var(--Post-background), var(--Background));
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 15px;
     box-sizing: border-box;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--Background);
 }
 
 .Post-header {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 15px;
     width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.Post-header-left {
+    display: flex;
+    align-items: center;
+}
+
+.post-title {
+    text-align: center;
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--Text);
+}
+
+.post-date {
+    color: var(--Text);
+    font-size: 0.9em;
 }
 
 .Post-content {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
 }
 
-.Post-footer {
-    padding: 3px;
+.post-description {
+    margin-left: 60px;  /* Aligns with the profile picture */
+    color: var(--Text);
+}
+
+.Post-image {
+    max-width: 60%;
+    margin-left: 60px;  /* Aligns with the profile picture */
+}
+
+.Post-misc {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
 }
 
 
@@ -182,14 +227,17 @@ header {
 footer {
     display: flex;
     align-content: center;
-    background-color: var(--color3);
+    background: linear-gradient(179deg, var(--PurpleLight3) 0%, var(--Background2) 60%);
     position: relative;
     bottom: 0;
-    padding: 1rem;
-    margin-top: 15px;
+    padding: 20px;
+    margin-top: auto;
     height: 30px;
     flex-direction: row;
     justify-content: space-between;
+    background-color: var(--Background2);
+    color: white;
+    text-align: center;
 }
 
 
@@ -211,26 +259,36 @@ footer {
 
 /*--------------- Side Banner and Advertisement Stylings---------------*/
 #Side-banner {
+    background-color: var(--Background2);
+    border-radius: 5px;
     max-height: 80vh;
     position: sticky;
-    position: -webkit-sticky;
+    top: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #Side-banner > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     height: 80vh;
     width: 100%;
-    top: 0px;
-    border: 3px solid var(--color4);
+    border: 3px solid var(--PurpleLight1);
     overflow: hidden;
+    border-radius: 5px;
+}
+
+#Ad-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #Ad-link img {
-    min-width: 100%;
-    min-height: 100%;
-    transition: transform 0.3s;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 #Side-banner img:hover {
@@ -242,7 +300,7 @@ footer {
 #Login-form {
     width: min-content;
     border-radius: 5px;
-    background-color: var(--color3);
+    background-color: var(--PurpleLight2);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -261,16 +319,17 @@ footer {
 
 /*--------------- Button Stylings---------------*/
 .Like-button {
-    background-color: #007bff;
+    background-color: var(--Background2);
     color: white;
-    border: none;
+    border: 2px solid var(--PurpleLight3);
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .Like-button:hover {
-    background-color: #0056b3;
+    background-color: var(--Background);
 }
 
 .Profile-button {
@@ -428,35 +487,55 @@ input[type="file"] {
 .create-post-button:hover {
     background-color: #0056b3;
 }
+
+/*--------------- Dropdown Menu Stylings---------------*/
 
 .DropdownItems {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    right: 0;
+    background-color: var(--Background2);
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    margin-top: 11.35rem;
+    margin-top: 12rem;
+    border-radius: 5px;
 }
 
-  
 .DropdownItems a {
-    color: black;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    transition: all 0.3s ease;
+    background: transparent;
 }
 
-.show {display: block;}
-
-.DropdownItems {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    margin-top: 11.35rem;
+.DropdownItems a:hover {
+    background: var(--Background4);
+    color: var(--PurpleLight1);
+    transition: all 0.3s ease;
 }
+
+.show {
+    display: block;
+}
+
+/* Mobile Syling */
+@media screen and (max-width: 620px) {
+    #Forum-display {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+
+    #Side-banner {
+        display: none;
+    }
+
+    #Forum {
+        padding-right: 0;  
+    }
+}
+
