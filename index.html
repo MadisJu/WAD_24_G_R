@@ -30,73 +30,7 @@
                         </a>
                     </div>
                 </div>
-                <div id= "Forum">
-                    <div class="Post">
-                        <div class="Post-header">
-                            <img class="Profile-image" src="Website/Data/Default.jpg">
-                            <span class="post-date">Dec 12, 2022</span>
-                        </div>
-                        <div class = "Post-content">
-                            <img class="Post-image">
-                            <p>Paragraph</p>
-                        </div>
-                        <div class="Post-misc">
-                            <button class="Like-button">👍 Like</button>
-                        </div>
-                    </div>
-                    <div class="Post">
-                        <div class="Post-header">
-                            <img class="Profile-image" src="Website/Data/Default.jpg">
-                            <span class="post-date">Dec 24, 2022</span>
-                        </div>
-                        <div class = "Post-content">
-                            <img class="Post-image" src="Website/Data/happy man.jpg">
-                            <p>Merry chrisis</p>
-                        </div>
-                        <div class="Post-misc">
-                            <button class="Like-button">👍 Like</button>
-                        </div>
-                    </div>
-                    <div class="Post">
-                        <div class="Post-header">
-                            <img class="Profile-image" src="Website/Data/Default.jpg">
-                            <span class="post-date">Dec 15, 2022</span>
-                        </div>
-                        <div class = "Post-content">
-                            <img class="Post-image">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="Post-misc">
-                            <button class="Like-button">👍 Like</button>
-                        </div>
-                    </div>
-                    <div class="Post">
-                        <div class="Post-header">
-                            <img class="Profile-image" src="Website/Data/Default.jpg">
-                            <span class="post-date">Dec 9, 2022</span>
-                        </div>
-                        <div class = "Post-content">
-                            <img class="Post-image">
-                            <p>Im dyin .</p>
-                        </div>
-                        <div class="Post-misc">
-                            <button class="Like-button">👍 Like</button>
-                        </div>
-                    </div>
-                    <div class="Post">
-                        <div class="Post-header">
-                            <img src="Website/Data/profile.png" alt="Profiilipilt" class="Profile-image">
-                            <span class="Post-date">Dec 25, 2022</span>
-                        </div>
-                        <div class="Post-content">
-                            <img src="Website/Data/inspiring-quote.png" alt="Postituspilt" class="Post-image">
-                            <p class="Post-text">Something to make your day better...</p>
-                        </div>
-                        <div class="Post-footer">
-                            <button class="Like-button">👍 Like</button>
-                        </div>
-                    </div>
-                </div>
+                <div id= "Forum"></div>
                 <div id="Side-banner">
                     <div>
                         <a id="Ad-link" href="https://madislolinc.azurewebsites.net/" target="_blank"> 
@@ -106,10 +40,72 @@
                 </div>
             </div>
     </div>
-</body>
     <footer>
         <p id="Team-info">Team R</p>
         <img src="Website/Data/TeamR.jpeg"/>
         <a>Legal</a>
     </footer>
+    <script>
+        // Function to load data from local JSON file
+        async function loadPostsFromJSON() {
+        try {
+            const response = await fetch("Website/Data/Posts/Posts.json");
+            const posts = await response.json();
+            displayPosts(posts);
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+        }
+
+        /*online fetch
+        async function fetchPosts() {
+            try {
+                const response = await fetch("https://api.npoint.io/e1adfb5b64f6a8089ce2");
+                const posts = await response.json();
+
+                // Kutsub funktsiooni, et kuvada postitused lehel
+                displayPosts(posts);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+            }
+        }
+        */
+
+        // Funktsioon postituste kuvamiseks
+        function displayPosts(posts) {
+            const forum = document.getElementById("Forum");
+
+            posts.forEach(post => {
+                const postElement = document.createElement("div");
+                postElement.className = "Post";
+
+                // Postituse sisu koostamine
+                postElement.innerHTML = `
+                    <div class="Post-header">
+                        <img class="Profile-image" src="Website/Data/Default.jpg" alt="Profiilipilt">
+                        <span class="post-date">${post.add_date}</span>
+                    </div>
+                    <div class="Post-content">
+                        ${post.image_url ? `<img class="Post-image" src="${post.image_url}" alt="Postituspilt">` : ""}
+                        <p>${post.post_caption}</p>
+                        <p>${post.post_description}</p>
+                    </div>
+                    <div class="Post-misc">
+                        <button class="Like-button">👍 Like (${post.like_count})</button>
+                    </div>
+                `;
+
+                forum.appendChild(postElement);
+            });
+        }
+            
+        loadPostsFromJSON();
+        /* Kutsume välja fetchPosts funktsiooni
+        fetchPosts();
+        */
+        
+    </script>
+
+</body>
+    
 </html>
