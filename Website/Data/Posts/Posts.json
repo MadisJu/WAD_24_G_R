@@ -11,7 +11,7 @@
       "add_date": "2024-10-31",
       "post_caption": "Delicious dinner",
       "post_description": "Had some yummy pasta",
-      "image_url": "",
+      "image_url": "Website/Data/Posts/Images/happy man.jpg",
       "author_id": 1,
       "like_count": 5
     },
@@ -19,7 +19,7 @@
       "add_date": "2024-10-30",
       "post_caption": "Workout session",
       "post_description": "Feeling great after a solid workout.",
-      "image_url": "",
+      "image_url": "Website/Data/Posts/Images/inspiring-quote.png",
       "author_id": 1,
       "like_count": 8
     },
@@ -59,7 +59,7 @@
       "add_date": "2024-10-25",
       "post_caption": "Art exhibition",
       "post_description": "Visited an inspiring art exhibition.",
-      "image_url": "",
+      "image_url": "Website/Data/Posts/Images/tartu2022.jpg",
       "author_id": 1,
       "like_count": 10
     },
