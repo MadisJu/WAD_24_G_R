@@ -42,7 +42,6 @@ header
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    box-sizing: border-box;
     margin-bottom: 15px;
     z-index: 1000;
     height: 50px;
@@ -68,6 +67,11 @@ header
     padding: 0.5rem;
     text-decoration: none;
 
+}
+
+.Navbar-Link > button {
+    background-color: transparent;
+    border: none;
 }
 
 #Nav-Container {
@@ -129,14 +133,12 @@ header
     box-sizing: border-box;
 }
 
-.Profile-image
-{
-    max-width: 50px;
-    aspect-ratio: 1/1;
+.Profile-image {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 2px solid var(--background-color)
+    margin-left: 0; 
 }
-
 .Post-image
 {
     max-width: 80%;
@@ -262,3 +264,24 @@ footer
 .Like-button:hover {
     background-color: #0056b3;
 }
+
+.DropdownItems {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 11.35rem;
+}
+
+  
+.DropdownItems a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.show {display: block;}
