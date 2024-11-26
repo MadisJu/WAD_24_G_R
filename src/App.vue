@@ -2,13 +2,14 @@
   <body>
     <Header/>
     <router-view />
-    <SignUp/>
+    <FooterComponent/>
   </body>
 </template>
 
 <script>
 
 import Header from './components/NavHeader.vue'
+import FooterComponent from './components/FooterComponent.vue';
 
 export default 
 {
@@ -16,6 +17,7 @@ export default
   components: 
   {
     Header,
+    FooterComponent
   }
 }
 </script>
