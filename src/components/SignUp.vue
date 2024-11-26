@@ -42,5 +42,22 @@ function checkPassword() {
 </script>
 
 <style>
+#Login-form {
+    width: min-content;
+    border-radius: 5px;
+    background-color: var(--PurpleLight2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    align-self: center;
+    margin-top: 1rem;
+}
 
+#login {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 </style>
