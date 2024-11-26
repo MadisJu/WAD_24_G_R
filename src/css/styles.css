@@ -1,0 +1,105 @@
+/*--------------- Root Variables---------------*/
+:root {
+    --background-color: #f4c7e3;
+    --PurpleLight3: #875682;
+    --PurpleLight2: #b36c93;
+    --PurpleLight1: #fededd;
+    
+    --Post-background: #75326e;
+    --Background: #5a2454;
+    --Background2: #a04896;
+    --Background4: #be67b4;
+    --Background3: #170515;
+
+    --Text: #ffffff;
+    background: linear-gradient(to bottom, var(--Background3) 0%, var(--Background2) 8%, var(--Background) 100%);
+}
+
+
+/*--------------- Base Layout Stylings---------------*/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*--------------- Text Stylings---------------*/
+p, b {
+    color: var(--Text);
+    margin: 0px;
+}
+
+p {
+    color: var(--Text);
+    margin-bottom: 10px;
+}
+
+a {
+    color: var(--Text);
+}
+
+h2 {
+    color: var(--Text);
+    margin: 1px;
+}
+
+/*--------------- Image Stylings---------------*/
+.Profile-image {
+    max-width: 50px;
+    max-height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 2px solid var(--background-color);
+    transition: transform 0.3s ease;
+}
+
+.Profile-image:hover {
+    transform: scale(1.1);
+}
+
+/*--------------- Button Stylings---------------*/
+.Like-button {
+    background-color: var(--Background2);
+    color: white;
+    border: 2px solid var(--PurpleLight3);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.Like-button:hover {
+    background-color: var(--Background);
+}
+
+.Profile-button {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 0;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.Profile-button .Navbar-Link {
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Profile-button .Navbar-Link:hover {
+    background-color: transparent;
+}
