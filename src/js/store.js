@@ -69,7 +69,7 @@ const initialPosts = [
       "add_date": "2024-10-25",
       "post_caption": "Art exhibition",
       "post_description": "Visited an inspiring art exhibition.",
-      "image_url": "../assets/postImages/tartu2022.jpg",
+      "image_url": "@/assets/postImages/tartu2022.jpg",
       "author_id": 1,
       "like_count": 10
     },
