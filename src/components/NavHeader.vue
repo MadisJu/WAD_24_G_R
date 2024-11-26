@@ -14,7 +14,7 @@
         <div id="Dropdown" class="DropdownItems">
             <a>Username</a>
             <a>Email</a>
-            <a href="">logout</a>
+            <a @click.prevent="goToSignUp">login</a>
         </div>
     </div>
 </header>
@@ -22,14 +22,29 @@
 
 <script>
 
+import { useRouter } from 'vue-router';
+
 export default 
 {
     name: 'NavHeader',
-    methods: {
-        toggleDropdown() {
+    methods: 
+    {
+        toggleDropdown() 
+        {
             document.getElementById("Dropdown").classList.toggle("show");
         }
-    }
+    },
+    setup() 
+    {
+        const router = useRouter();
+
+        const goToSignUp = () => 
+        {
+        router.push('/signup');
+        };
+
+        return {goToSignUp,};
+    },
 }
 
 </script>

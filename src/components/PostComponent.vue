@@ -2,7 +2,7 @@
   <div class="Post">
     <div class="Post-header">
       <div class="Post-header-left">
-        <img class="Profile-image" src="../assets/profile/Default.jpg" alt="Profile Image">
+        <img class="Profile-image" :src="require('@/assets/profile/Default.jpg')" alt="Profile Image">
       </div>
       <h3 class="post-title">{{ postCaption }}</h3>
       <span class="post-date">{{ addDate }}</span>
@@ -29,22 +29,28 @@ export default
   computed: 
   {
     ...mapGetters(['allPosts']),
-    post() {
+    post() 
+    {
       return this.allPosts.find(p => p.id === this.postId);
     },
-    postCaption() {
+    postCaption() 
+    {
       return this.post ? this.post.post_caption : '';
     },
-    addDate() {
+    addDate() 
+    {
       return this.post ? this.post.add_date : '';
     },
-    postDescription() {
+    postDescription() 
+    {
       return this.post ? this.post.post_description : '';
     },
-    imageUrl() {
-      return this.post ? this.post.image_url : '';
+    imageUrl() 
+    {
+      return this.post && this.post.image_url ? require(`@/assets/postImages/${this.post.image_url}`) : '';
     },
-    likes() {
+    likes() 
+    {
       return this.post ? this.post.like_count : 0;
     },
   },

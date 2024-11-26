@@ -15,7 +15,7 @@ const initialPosts = [
       "add_date": "2024-10-31",
       "post_caption": "Delicious dinner",
       "post_description": "Had some yummy pasta",
-      "image_url": "../assets/postImages/happy man.jpg",
+      "image_url": "happy man.jpg",
       "author_id": 1,
       "like_count": 5
     },
@@ -24,7 +24,7 @@ const initialPosts = [
       "add_date": "2024-10-30",
       "post_caption": "Workout session",
       "post_description": "Feeling great after a solid workout.",
-      "image_url": "../assets/postImages/inspiring-quote.png",
+      "image_url": "inspiring-quote.png",
       "author_id": 1,
       "like_count": 8
     },
@@ -69,7 +69,7 @@ const initialPosts = [
       "add_date": "2024-10-25",
       "post_caption": "Art exhibition",
       "post_description": "Visited an inspiring art exhibition.",
-      "image_url": "@/assets/postImages/tartu2022.jpg",
+      "image_url": "tartu2022.jpg",
       "author_id": 1,
       "like_count": 10
     },

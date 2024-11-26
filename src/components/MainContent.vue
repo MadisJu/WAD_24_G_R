@@ -59,6 +59,7 @@ export default
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
+    overflow-y: hidden;
 }
 
 #Forum-display {
@@ -83,6 +84,7 @@ export default
     box-sizing: border-box;
     overflow-y: auto;
     padding-right: 20px;
+    align-items: stretch;
 }
 
 #Forum::-webkit-scrollbar 
@@ -99,6 +101,7 @@ export default
     top: 20px;
     width: 100%;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 #Side-banner > div {
