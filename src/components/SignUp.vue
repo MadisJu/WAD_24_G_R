@@ -4,41 +4,70 @@
     <a href="/404">Create an account</a>
     <p>or</p>
     <p>Please log in</p>
-    <form id="login" @submit.prevent="checkPassword">
+    <form id="login" @submit.prevent="validateForm">
         <input type="email" id="email" v-model="email" placeholder="Email" required autocomplete="off">
         <input type="password" id="password" v-model="password" placeholder="Password" required>
         <button type="submit" id="submit">Log in</button>
+        <div v-if="errorMessages.length" class="error-messages">
+        <p>The password is not valid:</p>
+        <ul>
+          <li v-for="(error, index) in errorMessages" :key="index">{{ error }}</li>
+        </ul>
+      </div>
     </form>
     <a href="/404">Forget password</a>
 </div>
 </template>
 
-<script setup lang="js">
+<script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-const email = ref("");
-const password = ref("");
+export default {
+  setup() {
+    const router = useRouter();
 
-function checkPassword() {
-    const checks = {
-        length: password.value.length >= 8 && password.value.length < 15,
-        startsWithUppercase: /^[A-Z]/.test(password.value),
-        hasTwoLowercase: /[a-z].*[a-z]/.test(password.value),
-        hasNumeric: /\d/.test(password.value),
-        includesUnderscore: /_/.test(password.value),
+    const password = ref("");
+    const errorMessages = ref([]);
+
+    const validatePassword = () => {
+      errorMessages.value = [];
+      
+      if (password.value.length < 8 || password.value.length >= 15) {
+        errorMessages.value.push("Must be at least 8 characters and less than 15 characters.");
+      }
+      if (!/[A-Z]/.test(password.value)) {
+        errorMessages.value.push("Must include at least one uppercase alphabet character.");
+      }
+      if ((password.value.match(/[a-z]/g) || []).length < 2) {
+        errorMessages.value.push("Must include at least two lowercase alphabet characters.");
+      }
+      if (!/[0-9]/.test(password.value)) {
+        errorMessages.value.push("Must include at least one numeric value.");
+      }
+      if (!/^[A-Z]/.test(password.value)) {
+        errorMessages.value.push("Must start with an uppercase alphabet character.");
+      }
+      if (!/_/.test(password.value)) {
+        errorMessages.value.push('Must include the character "_"');
+      }
     };
 
-    const failedConditions = Object.entries(checks)
-        .filter(([, isValid]) => !isValid)
-        .map(([key]) => key);
+    const validateForm = () => {
+      validatePassword();
+      if (errorMessages.value.length === 0) {
+        router.push('/')
+      }
+    };
 
-    if (failedConditions.length === 0) {
-        console.log("Password is valid")
-    } else {
-        console.log("Failed conditions:", failedConditions)
-    }
-}
-
+    return {
+      password,
+      errorMessages,
+      validatePassword,
+      validateForm,
+    };
+  },
+};
 </script>
 
 <style>
@@ -59,5 +88,9 @@ function checkPassword() {
     flex-direction: column;
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.error-messages {
+    color: white;
 }
 </style>
