@@ -2,11 +2,11 @@
 <header>
     <div id="Nav-Container">
         <div class="Navbar-button">
-            <a class = "Navbar-Link" href="">Home</a>
+            <a class = "Navbar-Link" href="" @click="goToHome">Home</a>
         </div>
         <p>|</p>
         <div class="Navbar-button">
-            <a class = "Navbar-Link" href="">Add a post</a>
+            <a class = "Navbar-Link" href="" @click="goToPost">Add a post</a>
         </div>
     </div>
     <div class="Navbar-button" @click="toggleDropdown">
@@ -40,10 +40,18 @@ export default
 
         const goToSignUp = () => 
         {
-        router.push('/signup');
+            router.push('/signup');
         };
+        const goToHome = () =>
+        {
+            router.push('/')
+        }
+        const goToPost = () =>
+        {
+            router.push('/post')
+        }
 
-        return {goToSignUp,};
+        return {goToSignUp,goToHome,goToPost};
     },
 }
 
