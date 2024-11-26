@@ -9,6 +9,7 @@
                     </div>
                 </div>
                 <div id="Forum">
+                    <button class="Like-button" @click="resLikes">Reset likes!</button>
                     <div v-for="post in allPosts" :key="post.id"> <!--Got thisfrom the intermet!-->
                          <PostComponent :postId="post.id" :content="post.post_caption" />
                     </div>
@@ -42,8 +43,7 @@ export default
     methods:
     {
         ...mapActions(['resetLikes']),
-        resetLikes()
-        {
+        resLikes() {
             this.resetLikes();
         }
     }

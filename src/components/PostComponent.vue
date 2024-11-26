@@ -112,13 +112,13 @@ export default
 }
 
 .post-description {
-    margin-left: 60px;  /* Aligns with the profile picture */
+    margin-left: 60px;  
     color: var(--Text);
 }
 
 .Post-image {
     max-width: 60%;
-    margin-left: 60px;  /* Aligns with the profile picture */
+    margin-left: 60px;  
 }
 
 .Post-misc {

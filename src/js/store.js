@@ -106,12 +106,12 @@ export default createStore(
       const post = state.posts.find(p => p.id === postId);
       if (post) 
       {
-        post.likes++;
+        post.like_count++;
       }
     },
     resetLikes(state) 
     {
-      state.posts.forEach(post => { post.likes = 0; });
+      state.posts.forEach(post => { post.like_count = 0; });
     },
     setPosts(state, posts) 
     {
