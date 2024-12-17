@@ -1,7 +1,7 @@
 <template>
 <div id="Login-form">
     <b>Welcome to PostIt</b>
-    <a href="/404">Create an account</a>
+    <router-link to="/register">Create an account</router-link>
     <p>or</p>
     <p>Please log in</p>
     <form id="login" @submit.prevent="validateForm">
