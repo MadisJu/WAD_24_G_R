@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
 import PostComponent from './PostComponent.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default 
 {

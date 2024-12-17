@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import MainContent from '@/components/MainContent.vue';
 import SignUp from '@/components/SignUp.vue';
 import AddPostComponent from '@/components/AddPostComponent.vue';
+import PostPage from '@/components/PostPage.vue';
 
 const routes = [
   {
@@ -18,6 +19,12 @@ const routes = [
     path: '/post',
     name: 'Post',
     component: AddPostComponent,
+  },
+  {
+    path: '/post/:id', // Dynamic route for individual post
+    name: 'PostPage',
+    component: PostPage,
+    props: true,
   },
 ];
 

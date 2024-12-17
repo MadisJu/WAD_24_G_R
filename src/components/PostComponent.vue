@@ -4,7 +4,10 @@
       <div class="Post-header-left">
         <img class="Profile-image" :src="require('@/assets/profile/Default.jpg')" alt="Profile Image">
       </div>
-      <h3 class="post-title">{{ postCaption }}</h3>
+      <!-- Pealkiri on klikitav -->
+      <router-link :to="`/post/${postId}`" class="post-title-link">
+        <h3 class="post-title">{{ postCaption }}</h3>
+      </router-link>
       <span class="post-date">{{ addDate }}</span>
     </div>
     <div class="Post-content">

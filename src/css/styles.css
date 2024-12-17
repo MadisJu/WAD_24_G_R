@@ -109,3 +109,13 @@ h2 {
 .Profile-button .Navbar-Link:hover {
     background-color: transparent;
 }
+.post-link {
+    text-decoration: none;
+    color: var(--Text);
+    transition: color 0.3s ease;
+  }
+  
+  .post-link:hover {
+    color: var(--PurpleLight2);
+  }
+  
