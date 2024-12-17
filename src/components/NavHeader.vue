@@ -2,11 +2,11 @@
 <header>
     <div id="Nav-Container">
         <div class="Navbar-button">
-            <a class = "Navbar-Link" href="" @click="goToHome">Home</a>
+            <a class="Navbar-Link" href="#" @click.prevent="goToHome">Home</a>
         </div>
         <p>|</p>
         <div class="Navbar-button">
-            <a class = "Navbar-Link" href="" @click="goToPost">Add a post</a>
+            <a class="Navbar-Link" href="#" @click.prevent="goToPost">Add a post</a>
         </div>
     </div>
     <div class="Navbar-button" @click="toggleDropdown">
@@ -14,7 +14,7 @@
         <div id="Dropdown" class="DropdownItems">
             <a>Username</a>
             <a>Email</a>
-            <a @click.prevent="goToSignUp">login</a>
+            <a @click.prevent="logout">Logout</a>
         </div>
     </div>
 </header>
@@ -23,6 +23,7 @@
 <script>
 
 import { useRouter } from 'vue-router';
+import auth from '../js/auth';
 
 export default 
 {
@@ -32,17 +33,29 @@ export default
         toggleDropdown() 
         {
             document.getElementById("Dropdown").classList.toggle("show");
+        },
+        async logout() {
+            try {
+                const response = await fetch("http://localhost:3000/auth/logout", {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+                if (response.ok) {
+                    auth.user.authenticated = false;
+                    this.goToLogin();
+                } else {
+                    console.error('Logout failed:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error during logout:', error);
+            }
         }
     },
     setup() 
     {
         const router = useRouter();
 
-        const goToSignUp = () => 
-        {
-            router.push('/signup');
-        };
-        const goToHome = () =>
+        const goToHome = () => 
         {
             router.push('/')
         }
@@ -50,8 +63,12 @@ export default
         {
             router.push('/post')
         }
+        const goToLogin = () =>
+        {
+            router.push('/signup')
+        }
 
-        return {goToSignUp,goToHome,goToPost};
+        return {goToHome,goToPost, goToLogin};
     },
 }
 
