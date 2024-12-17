@@ -43,15 +43,14 @@ const router = createRouter({
   routes,
 });
 
-// Navigation guard to check authentication
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  const isAuthenticated = await auth.authenticated(); // Check authentication status
+  const isAuthenticated = await auth.authenticated();
 
   if (requiresAuth && !isAuthenticated) {
-    next('/signup'); // Redirect to login page if not authenticated
+    next('/signup'); 
   } else {
-    next(); // Proceed to the route
+    next(); 
   }
 });
 
