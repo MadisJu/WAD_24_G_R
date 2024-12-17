@@ -1,6 +1,7 @@
 <template>
   <div class="Post">
     <div class="Post-header">
+      <h3 class="post-title">{{ ID }}</h3>
       <h3 class="post-title">{{ title }}</h3>
       <span class="post-date">{{ date }}</span>
     </div>
@@ -21,7 +22,7 @@ export default
 {
   props: 
   {
-    postId: {
+    ID: {
       type: Number,
       required: true,
     },
@@ -34,15 +35,18 @@ export default
     ...mapGetters(['allPosts']),
     post() 
     {
-      return this.allPosts.find(p => p.id === this.postId);
-    },
-    addDate() 
-    {
-      return this.post ? this.post.add_date : '';
+      return this.allPosts.find(p => p.ID === this.ID);
     },
     imageUrl() 
     {
-      return '';
+      try
+      {
+        return require(`@/assets/postImages/${this.ID}.jpg`);
+      }
+      catch (error)
+      {
+        return '';
+      }
     },
     likesCount() 
     {
@@ -51,9 +55,10 @@ export default
   },
   methods: 
   {
-    ...mapActions(['incrementLikes']),
-    likePost() {
-      this.incrementLikes(this.postId);
+    ...mapActions(['incrementLikes', 'updateLikes']),
+    likePost() 
+    {
+      this.updateLikes(this.ID);
     },
   },
 };

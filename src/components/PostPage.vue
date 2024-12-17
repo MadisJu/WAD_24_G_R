@@ -1,57 +1,127 @@
 <template>
-    <div class="post-page">
-      <div class="content">
-        <div id="Side-banner">
-            <div>
-              <a id="Ad-link" href="https://www.x-legend.com/online/grandfantasia/" target="_blank"> 
-                <img src="../assets/AD.png">
-              </a>
+    <div class="post-page" v-if="post">
+        <div class="content">
+            <div id="Side-banner">
+                <div>
+                    <a id="Ad-link" href="https://www.x-legend.com/online/grandfantasia/" target="_blank"> 
+                        <img src="../assets/AD.png">
+                    </a>
+                </div>
             </div>
-          </div>
-        <div class="post-details">
-          <h1>{{ post?.post_caption }}</h1>
-          <span class="post-date">{{ post?.add_date }}</span>
-          <p>{{ post?.post_description }}</p>
-          <img
-            v-if="post?.image_url"
-            class="post-image"
-            :src="require(`@/assets/postImages/${post.image_url}`)"
-            alt="Post Image"
-          />
-          <div class="actions">
-            <button class="action-button">Update</button>
-            <button class="action-button delete">Delete</button>
-          </div>
+            <div class="post-details">
+                <h1>{{ post.Title }}</h1>
+                <span class="post-date">{{ post.Date }}</span>
+                <p>{{ post.Text }}</p>
+                <img v-if="imageUrl" class="Post-image" :src="imageUrl" alt="Post Image">
+                <div class="actions">
+                    <button class="action-button" @click="updatePost">Update</button>
+                    <button class="action-button delete" @click="deletePost">Delete</button>
+                </div>
+                <div class="Post-misc">
+                  <button class="Like-button" @click="likePost">👍 Like ({{ post.Likes }})</button>
+                </div>
+            </div>
+            <div id="Side-banner">
+                <div>
+                    <a id="Ad-link" href="https://kebabstop.ee/menuu/" target="_blank"> 
+                        <img src="../assets/AD2.jpg">
+                    </a>
+                </div>
+            </div>
         </div>
-        <div id="Side-banner">
-          <div>
-            <a id="Ad-link" href="https://kebabstop.ee/menuu/" target="_blank"> 
-              <img src="../assets/AD2.jpg">
-            </a>
-          </div>
-        </div>
-      </div>
-      <footer></footer> <!-- Footer -->
+        <footer></footer> <!-- Footer -->
     </div>
-  </template>
-  
-  <script>
-  import { mapGetters } from 'vuex';
-  
-  export default {
-    name: 'PostPage',
-    props: ['id'], // Props route'ist
-    computed: {
-      ...mapGetters(['allPosts']),
-      post() {
-        return this.allPosts.find((p) => p.id == this.id);
-      },
+</template>
+
+<script>
+import {mapActions } from 'vuex';
+
+export default {
+name: 'PostPage',
+props: ['id'],
+data() 
+{
+    return {
+        post: null,
+    };
+},
+computed:
+{
+  imageUrl() 
+  {
+    try
+    {
+      return require(`@/assets/postImages/${this.post.ID}.jpg`);
+    }
+      catch (error)
+    {
+      return '';
+    }
+  }
+},
+methods: 
+{
+  ...mapActions(['incrementLikes', 'updateLikes']),
+  async fetchPost() 
+  {
+    try 
+    {
+      const response = await fetch(`http://localhost:3000/api/posts/${this.id}`);
+      if (response.ok) 
+      {
+          this.post = await response.json();
+      } else 
+      {
+          console.error('Failed to fetch post:', response.statusText);
+      }
+    } 
+    catch (error) 
+    {
+        console.error('Error fetching post:', error);
+    }
     },
-  };
-  </script>
-  
-  <style scoped>
-  .post-page {
+  async deletePost() 
+  {
+    try 
+    {
+        const response = await fetch(`http://localhost:3000/api/posts/${this.id}`, 
+        {
+            method: 'DELETE',
+        });
+        if (response.ok) 
+        {
+            this.$router.push('/');
+        } else 
+        {
+            console.error('Failed to delete post:', response.statusText);
+        }
+    } catch (error) 
+    {
+        console.error('Error deleting post:', error);
+    }
+  },
+  updatePost() 
+  {
+    this.$router.push(`/post/update/${this.post.ID}`);
+  },
+
+  async likePost() 
+  {
+    await this.updateLikes(this.post.ID);
+    this.post.likes += 1;
+  },
+},
+
+mounted() 
+{
+  this.fetchPost();
+},
+
+};
+</script>
+
+<style scoped>
+.post-page {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -97,14 +167,9 @@
   
   .action-button.delete {
     background-color: var(--Background);
-  }
-  
-  .side-banner {
-    background-color: var(--Background3);
-    height: 100%;
-  }
-  
-  .post-image {
+}
+
+.post-image {
     max-width: 100%;
     margin-top: 15px;
     border-radius: 5px;

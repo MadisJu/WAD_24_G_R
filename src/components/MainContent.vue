@@ -9,11 +9,11 @@
                     </div>
                 </div>
                 <div id="Forum">
-                    <button class="Like-button" @click="resLikes">Reset likes!</button>
+                    <button class="Like-button" @click="deleteAllPosts">Delete All Posts</button>
                     <div v-if="allPosts.length > 0">
-                        <div v-for="post in allPosts" :key="post.id">
+                        <div v-for="post in allPosts" :key="post.id " @click="goToPost(post.ID)">
                             <PostComponent 
-                                :postId="post.id" 
+                                :ID="Number(post.ID)" 
                                 :title="post.title" 
                                 :text="post.text" 
                                 :date="post.date" 
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
 import PostComponent from './PostComponent.vue';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -51,11 +52,22 @@ export default
     {
         ...mapGetters(['allPosts']),
     },
+    setup()
+    {
+        const router = useRouter();
+
+        const goToPost = (id) => {
+            router.push(`/post/${id}`);
+        };
+
+        return { goToPost };
+    },
     methods:
     {
-        ...mapActions(['resetLikes', 'fetchPosts']),
-        resLikes() {
-            this.resetLikes();
+        ...mapActions(['resetLikes', 'fetchPosts', 'deleteAllPosts']),
+        async deleteAllPosts() {
+            await this.$store.dispatch('deleteAllPosts');
+            this.fetchPosts(); // Refresh the posts after deletion
         }
     },
     mounted() {

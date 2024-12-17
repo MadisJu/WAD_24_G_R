@@ -21,7 +21,7 @@ const routes = [
     component: AddPostComponent,
   },
   {
-    path: '/post/:id', // Dynamic route for individual post
+    path: '/post/:id',
     name: 'PostPage',
     component: PostPage,
     props: true,
