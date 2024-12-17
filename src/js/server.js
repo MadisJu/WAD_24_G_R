@@ -161,7 +161,7 @@ app.post('/auth/signup', async(req, res) => {
         console.log("a signup request has arrived");
         const { email, username, password } = req.body;
 
-
+        
         // check if user exists
         const userExists = await pool.query(
             'SELECT * FROM "Users" WHERE "Email" = $1',
@@ -171,18 +171,19 @@ app.post('/auth/signup', async(req, res) => {
           if (userExists.rows.length > 0) {
             return res.status(400).json({ error: "User with this email already exists." });
           }
+        
 
         const salt = await bcrypt.genSalt(); //  generates the salt, i.e., a random string
         const bcryptPassword = await bcrypt.hash(password, salt) // hash the password and the salt 
         const authUser = await pool.query( // insert the user and the hashed password into the database
             'INSERT INTO "Users" ("Email", "Username","Password") values ($1, $2, $3) RETURNING*', [email, username, bcryptPassword]
         );
-        console.log(authUser.rows[0].id);
-        const token = await generateJWT(authUser.rows[0].id); // generates a JWT by taking the user id as an input (payload)
+        console.log(authUser.rows[0]["ID"]);
+        const token = await generateJWT(authUser.rows[0]["ID"]); // generates a JWT by taking the user id as an input (payload)
         res
             .status(201)
             .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
-            .json({ user_id: authUser.rows[0].id })
+            .json({ user_id: authUser.rows[0]["ID"], token })
             .send;
     } catch (err) {
         console.error(err.message);
