@@ -1,25 +1,62 @@
 <template>
-<div class="form-container">
-        <form class="add-post-form" action="../../index.html">
-            <div class="form-group">
-                <label for="postBody">Post body</label>
-                <textarea id="postBody" name="postBody" rows="4" cols="20"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="postImage">Select file</label>
-                <input type="file" id="postImage" name="postImage">
-            </div>
-            <button type="submit" class="create-post-button">Create post</button>
-        </form>
-</div>
-</template>
-
-<script>
-export default
-{
-    name: "AddPostComonent"
-}
-</script>
+    <div class="form-container">
+      <form @submit.prevent="addPost" class="add-post-form">
+        <div class="form-group">
+          <label for="postTitle">Post Title</label>
+          <textarea v-model="postTitle" id="postTitle" rows="1" placeholder="Enter post title" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="postBody">Post Body</label>
+          <textarea v-model="postBody" id="postBody" rows="4" placeholder="Enter post content" required></textarea>
+        </div>
+        <button type="submit" class="create-post-button">Create Post</button>
+      </form>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    name: "AddPostComponent",
+    data() {
+      return {
+        postTitle: "", // Salvestab postituse pealkirja
+        postBody: "", // Salvestab postituse sisu
+      };
+    },
+    methods: {
+      async addPost() {
+        // Kontrollime, kas väljad on täidetud
+        if (!this.postTitle || !this.postBody) {
+          alert("Please fill in all fields!");
+          return;
+        }
+  
+        try {
+          // POST päring serverisse
+          const response = await fetch("http://localhost:3000/api/posts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              title: this.postTitle,
+              text: this.postBody,
+              author_id: 1, // Vaikimisi autor ID (hiljem võib siduda kasutajaga)
+            }),
+          });
+  
+          if (response.ok) {
+            alert("Post added successfully!");
+            this.$router.push("/"); // Suuna pealehele
+          } else {
+            console.error("Failed to add post:", response.statusText);
+            alert("Failed to add post. Please try again.");
+          }
+        } catch (error) {
+          console.error("Error adding post:", error);
+        }
+      },
+    },
+  };
+  </script>
 
 <style>
 /*--------------- Form Styles---------------*/
