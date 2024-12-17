@@ -4,6 +4,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const createTables = require('./database').createTables;
 
 const port = process.env.PORT || 3000;
 
@@ -13,6 +14,12 @@ app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser());
+
+createTables().then(() => {
+    console.log("Tables created successfully.");
+}).catch(err => {
+    console.error("Error creating tables:", err);
+});
 
 // ADD POST
 app.post('/api/posts', async (req, res) => {

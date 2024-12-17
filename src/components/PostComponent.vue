@@ -56,8 +56,9 @@ export default
   methods: 
   {
     ...mapActions(['incrementLikes', 'updateLikes']),
-    likePost() 
+    likePost(event) 
     {
+      event.stopPropagation();
       this.updateLikes(this.ID);
     },
   },

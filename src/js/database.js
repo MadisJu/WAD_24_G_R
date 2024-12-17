@@ -9,6 +9,17 @@ const pool = new Pool({
 
 //CREATION
 const createTables = async () => {
+    const createUsersTable = `
+        CREATE TABLE IF NOT EXISTS public."Users"
+        (
+            "ID" bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+            "Username" character varying(50) COLLATE pg_catalog."default" NOT NULL,
+            "Password" character varying(255) COLLATE pg_catalog."default" NOT NULL,
+            "Email" character varying(255) COLLATE pg_catalog."default",
+            CONSTRAINT "PK" PRIMARY KEY ("ID")
+        );
+    `;
+
     const createPostsTable = `
         CREATE TABLE IF NOT EXISTS public."Posts"
         (
@@ -26,24 +37,17 @@ const createTables = async () => {
         );
     `;
 
-    const createUsersTable = `
-        CREATE TABLE IF NOT EXISTS public."Users"
-        (
-            "ID" bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
-            "Username" character varying(50) COLLATE pg_catalog."default" NOT NULL,
-            "Password" character varying(255) COLLATE pg_catalog."default" NOT NULL,
-            "Email" character varying(255) COLLATE pg_catalog."default",
-            CONSTRAINT "PK" PRIMARY KEY ("ID")
-        );
-    `;
+    
 
-    try {
-        await pool.query(createPostsTable);
+    try 
+    {
         await pool.query(createUsersTable);
+        await pool.query(createPostsTable);
+        
     } catch (error) 
     {
         console.error("Error:", error);
     }
 };
 
-module.exports = { pool, createTables };
+module.exports = { pool, createTables};
