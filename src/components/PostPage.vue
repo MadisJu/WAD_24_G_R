@@ -110,23 +110,26 @@ methods:
     }
   },
   async submitUpdatedPost(title, text) {
+    console.log('Sending update request:', { title, text }); // Kontrollime andmeid
     try {
-      const response = await fetch(`http://localhost:3000/api/posts/${this.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, text }),
-      });
+    const response = await fetch(`http://localhost:3000/api/posts/${this.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, text }), // Saadame serverisse uued andmed
+    });
+    const result = await response.json();
+    console.log('Update response:', result);
 
-      if (response.ok) {
-        this.fetchPost(); // Laeb uuendatud postituse andmed
-        alert('Post updated successfully!');
-      } else {
-        console.error('Failed to update post');
-      }
-    } catch (error) {
-      console.error('Error updating post:', error);
-      }
-    },
+    if (response.ok) {
+      this.post = await response.json(); // Laeme tagasi värskendatud postituse
+      alert('Post updated successfully!');
+    } else {
+      console.error('Failed to update post');
+    }
+  } catch (error) {
+    console.error('Error updating post:', error);
+    }
+  },
 
   async likePost() 
   {
