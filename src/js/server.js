@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
+app.use(cors({ origin: ['http://localhost:8080', 'http://localhost:8081'], credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -130,7 +130,6 @@ const generateJWT = (id) => {
 app.get('/auth/authenticate', async(req, res) => {
     console.log('authentication request has been arrived');
     const token = req.cookies.jwt; // assign the token named jwt to the token const
-    //console.log("token " + token);
     let authenticated = false; // a user is not authenticated until proven the opposite
     try {
         if (token) { //checks if the token exists
@@ -161,6 +160,17 @@ app.post('/auth/signup', async(req, res) => {
     try {
         console.log("a signup request has arrived");
         const { email, username, password } = req.body;
+
+
+        // check if user exists
+        const userExists = await pool.query(
+            'SELECT * FROM "Users" WHERE "Email" = $1',
+            [email]
+          );
+      
+          if (userExists.rows.length > 0) {
+            return res.status(400).json({ error: "User with this email already exists." });
+          }
 
         const salt = await bcrypt.genSalt(); //  generates the salt, i.e., a random string
         const bcryptPassword = await bcrypt.hash(password, salt) // hash the password and the salt 
