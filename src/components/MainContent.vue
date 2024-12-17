@@ -10,8 +10,19 @@
                 </div>
                 <div id="Forum">
                     <button class="Like-button" @click="resLikes">Reset likes!</button>
-                    <div v-for="post in allPosts" :key="post.id"> <!--Got thisfrom the intermet!-->
-                         <PostComponent :postId="post.id" :content="post.post_caption" />
+                    <div v-if="allPosts.length > 0">
+                        <div v-for="post in allPosts" :key="post.id">
+                            <PostComponent 
+                                :postId="post.id" 
+                                :title="post.title" 
+                                :text="post.text" 
+                                :date="post.date" 
+                                :likes="post.like_count" 
+                            />
+                        </div>
+                    </div>
+                    <div v-else>
+                        <p>No posts available.</p>
                     </div>
                 </div>
                 <div id="Side-banner">
@@ -42,10 +53,13 @@ export default
     },
     methods:
     {
-        ...mapActions(['resetLikes']),
+        ...mapActions(['resetLikes', 'fetchPosts']),
         resLikes() {
             this.resetLikes();
         }
+    },
+    mounted() {
+        this.fetchPosts();
     }
 }
 </script>

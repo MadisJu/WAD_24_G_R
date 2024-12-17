@@ -1,21 +1,15 @@
 <template>
   <div class="Post">
     <div class="Post-header">
-      <div class="Post-header-left">
-        <img class="Profile-image" :src="require('@/assets/profile/Default.jpg')" alt="Profile Image">
-      </div>
-      <!-- Pealkiri on klikitav -->
-      <router-link :to="`/post/${postId}`" class="post-title-link">
-        <h3 class="post-title">{{ postCaption }}</h3>
-      </router-link>
-      <span class="post-date">{{ addDate }}</span>
+      <h3 class="post-title">{{ title }}</h3>
+      <span class="post-date">{{ date }}</span>
     </div>
     <div class="Post-content">
-      <p class="post-description">{{ postDescription }}</p>
+      <p class="post-description">{{ text }}</p>
       <img v-if="imageUrl" class="Post-image" :src="imageUrl" alt="Post Image">
     </div>
     <div class="Post-misc">
-      <button class="Like-button" @click="likePost">👍 Like ({{ likes }})</button>
+      <button class="Like-button" @click="likePost">👍 Like ({{ likesCount }})</button>
     </div>
   </div>
 </template>
@@ -27,7 +21,13 @@ export default
 {
   props: 
   {
-    postId: Number,
+    postId: {
+      type: Number,
+      required: true,
+    },
+    title: String,
+    text: String,
+    date: String,
   },
   computed: 
   {
@@ -36,23 +36,15 @@ export default
     {
       return this.allPosts.find(p => p.id === this.postId);
     },
-    postCaption() 
-    {
-      return this.post ? this.post.post_caption : '';
-    },
     addDate() 
     {
       return this.post ? this.post.add_date : '';
     },
-    postDescription() 
-    {
-      return this.post ? this.post.post_description : '';
-    },
     imageUrl() 
     {
-      return this.post && this.post.image_url ? require(`@/assets/postImages/${this.post.image_url}`) : '';
+      return '';
     },
-    likes() 
+    likesCount() 
     {
       return this.post ? this.post.like_count : 0;
     },
