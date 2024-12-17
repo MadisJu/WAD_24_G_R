@@ -85,7 +85,6 @@ export default {
             const result = await response.json();
             console.log("Server response:", result);
 
-
             if (result.token) {
                 localStorage.setItem("authToken", result.token);
                 successMessage.value = "Login successful! Redirecting...";

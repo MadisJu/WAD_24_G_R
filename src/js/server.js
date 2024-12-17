@@ -180,7 +180,7 @@ app.post('/auth/signup', async(req, res) => {
         res
             .status(201)
             .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
-            .json({ user_id: authUser.rows[0]["ID"], token })
+            .json({ token })
             .send;
     } catch (err) {
         console.error(err.message);
@@ -212,7 +212,7 @@ app.post('/auth/login', async (req, res) => {
         res
             .status(201)
             .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
-            .json({ user_id: user.id });
+            .json({ token });
     } catch (error) {
         console.error("Error during login:", error);
         res.status(401).json({ error: error.message });
