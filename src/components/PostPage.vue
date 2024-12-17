@@ -102,8 +102,31 @@ methods:
   },
   updatePost() 
   {
-    this.$router.push(`/post/update/${this.post.ID}`);
+    const updatedTitle = prompt('Enter new title for the post:', this.post.Title);
+    const updatedText = prompt('Enter new text for the post:', this.post.Text);
+
+    if (updatedTitle && updatedText) {
+      this.submitUpdatedPost(updatedTitle, updatedText);
+    }
   },
+  async submitUpdatedPost(title, text) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/posts/${this.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, text }),
+      });
+
+      if (response.ok) {
+        this.fetchPost(); // Laeb uuendatud postituse andmed
+        alert('Post updated successfully!');
+      } else {
+        console.error('Failed to update post');
+      }
+    } catch (error) {
+      console.error('Error updating post:', error);
+      }
+    },
 
   async likePost() 
   {
