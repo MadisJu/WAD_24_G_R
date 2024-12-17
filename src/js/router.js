@@ -5,6 +5,7 @@ import AddPostComponent from '@/components/AddPostComponent.vue';
 import PostPage from '@/components/PostPage.vue';
 import CreateUser from '@/components/CreateUser.vue';
 import auth from './auth';
+import ContactUs from '@/components/ContactUs.vue';
 
 const routes = [
   {
@@ -35,7 +36,12 @@ const routes = [
     path: '/register',
     name: 'Registration',
     component: CreateUser,
-  }
+  },
+  {
+    path: '/contact',
+    name: 'ContactUs',
+    component: ContactUs,
+  },
 ];
 
 const router = createRouter({

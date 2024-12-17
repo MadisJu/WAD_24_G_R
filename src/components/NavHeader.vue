@@ -8,9 +8,13 @@
         <div class="Navbar-button">
             <a class="Navbar-Link" href="#" @click.prevent="goToPost">Add a post</a>
         </div>
+        <p>|</p>
+        <div class="Navbar-button">
+            <a class="Navbar-Link" href="#" @click.prevent="goToContact">Contact Us</a>
+        </div>
     </div>
     <div class="Navbar-button" @click="toggleDropdown">
-        <img src="../assets/profile/Default.jpg" alt="Profiilipilt" class="Profile-image">
+        <img src="../assets/profile/Default.jpg" alt="Profile Image" class="Profile-image">
         <div id="Dropdown" class="DropdownItems">
             <a>Username</a>
             <a>Email</a>
@@ -67,8 +71,12 @@ export default
         {
             router.push('/signup')
         }
+        const goToContact = () =>
+        {
+            router.push('/contact')
+        }
 
-        return {goToHome,goToPost, goToLogin};
+        return {goToHome,goToPost, goToLogin, goToContact};
     },
 }
 

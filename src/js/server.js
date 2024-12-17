@@ -155,14 +155,11 @@ app.get('/auth/authenticate', async(req, res) => {
     }
 });
 
-// signup a user
 app.post('/auth/signup', async(req, res) => {
     try {
         console.log("a signup request has arrived");
         const { email, username, password } = req.body;
 
-        
-        // check if user exists
         const userExists = await pool.query(
             'SELECT * FROM "Users" WHERE "Email" = $1',
             [email]
@@ -173,13 +170,13 @@ app.post('/auth/signup', async(req, res) => {
           }
         
 
-        const salt = await bcrypt.genSalt(); //  generates the salt, i.e., a random string
-        const bcryptPassword = await bcrypt.hash(password, salt) // hash the password and the salt 
-        const authUser = await pool.query( // insert the user and the hashed password into the database
+        const salt = await bcrypt.genSalt(); 
+        const bcryptPassword = await bcrypt.hash(password, salt) 
+        const authUser = await pool.query( 
             'INSERT INTO "Users" ("Email", "Username","Password") values ($1, $2, $3) RETURNING*', [email, username, bcryptPassword]
         );
         console.log(authUser.rows[0]["ID"]);
-        const token = await generateJWT(authUser.rows[0]["ID"]); // generates a JWT by taking the user id as an input (payload)
+        const token = await generateJWT(authUser.rows[0]["ID"]);
         res
             .status(201)
             .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
@@ -191,30 +188,38 @@ app.post('/auth/signup', async(req, res) => {
     }
 });
 
-app.post('/auth/login', async(req, res) => {
+const findUserByEmail = async (email) => {
+    const result = await pool.query('SELECT * FROM "Users" WHERE "Email" = $1', [email]);
+    return result.rows[0];
+};
+
+app.post('/auth/login', async (req, res) => {
     try {
-        console.log("a login request has arrived");
         const { email, password } = req.body;
-        const user = await pool.query('SELECT * FROM "Users" WHERE "Email" = $1', [email]);
-        if (user.rows.length === 0) return res.status(401).json({ error: "User is not registered" });
+        const user = await findUserByEmail(email);
+        
+        if (!user) {
+            return res.status(401).json({ error: "User is not registered" });
+        }
 
-        //Checking if the password is correct
-        const validPassword = await bcrypt.compare(password, user.rows[0].password);
-        //console.log("validPassword:" + validPassword);
-        if (!validPassword) return res.status(401).json({ error: "Incorrect password" });
+        const validPassword = await bcrypt.compare(password, user.Password);
 
-        const token = await generateJWT(user.rows[0].id);
+        if (!validPassword) {
+            return res.status(401).json({ error: "Incorrect password" });
+        }
+
+        const token = await generateJWT(user.id);
         res
             .status(201)
             .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
-            .json({ user_id: user.rows[0].id })
-            .send;
+            .json({ user_id: user.id });
     } catch (error) {
+        console.error("Error during login:", error);
         res.status(401).json({ error: error.message });
     }
 });
 
-//logout a user = deletes the jwt
+
 app.get('/auth/logout', (req, res) => {
     console.log('delete jwt request arrived');
     res.status(202).clearCookie('jwt').json({ "Msg": "cookie cleared" });

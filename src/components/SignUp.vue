@@ -27,8 +27,10 @@ export default {
   setup() {
     const router = useRouter();
 
+    const email = ref("");
     const password = ref("");
     const errorMessages = ref([]);
+    const successMessage = ref("");
 
     const validatePassword = () => {
       errorMessages.value = [];
@@ -56,15 +58,55 @@ export default {
     const validateForm = () => {
       validatePassword();
       if (errorMessages.value.length === 0) {
-        router.push('/')
+        login();
       }
     };
 
+    const login = async () => {
+        try {
+            const data = {
+                email: email.value,
+                password: password.value,
+            };
+
+            const response = await fetch("http://localhost:3000/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error("Login failed");
+            }
+
+            const result = await response.json();
+            console.log("Server response:", result);
+
+
+            if (result.token) {
+                localStorage.setItem("authToken", result.token);
+                successMessage.value = "Login successful! Redirecting...";
+                setTimeout(() => {
+                    router.push("/");
+                }, 1500);
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            errorMessages.value = ["Login failed. Please try again."];
+        }
+    };
+
     return {
+      email,
       password,
       errorMessages,
+      successMessage,
       validatePassword,
       validateForm,
+      login,
     };
   },
 };
